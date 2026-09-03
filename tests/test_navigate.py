@@ -1,6 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from data import USER_EMAIL, USER_PASSWORD
+from data import Urls, USER_EMAIL, USER_PASSWORD
 from locators import MainPageLocators, LoginPageLocators, AccountPageLocators
 
 
@@ -14,6 +14,7 @@ class TestNavigate:
         # Проверка перехода на страницу авторизации
         login_page_title = wait.until(EC.visibility_of_element_located(LoginPageLocators.LOGIN_PAGE_TITLE))
         assert login_page_title.is_displayed()
+        assert driver.current_url == Urls.LOGIN_PAGE
 
     def test_navigate_to_constructor_from_personal_account(self, driver):
         wait = WebDriverWait(driver, 5)
@@ -30,6 +31,7 @@ class TestNavigate:
         wait.until(EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON))
         wait.until(EC.element_to_be_clickable(MainPageLocators.PERSONAL_ACCOUNT_LINK)).click()
         wait.until(EC.visibility_of_element_located(AccountPageLocators.PROFILE_LINK))
+        assert driver.current_url == Urls.ACCOUNT_PAGE
 
         # Переход в конструктор
         driver.find_element(*MainPageLocators.CONSTRUCTOR_LINK).click()
@@ -37,3 +39,4 @@ class TestNavigate:
         # Проверка перехода на страницу с конструктором
         main_page = wait.until(EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON))
         assert main_page.is_displayed()
+        assert driver.current_url == Urls.MAIN_PAGE

@@ -1,6 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from data import USER_EMAIL, USER_PASSWORD
+from data import Urls, USER_EMAIL, USER_PASSWORD
 from locators import MainPageLocators, LoginPageLocators, AccountPageLocators
 
 
@@ -28,3 +28,4 @@ class TestLogout:
         # Проверка выхода из личного аккаунта и перехода на страницу авторизации
         login_page_title = wait.until(EC.visibility_of_element_located(LoginPageLocators.LOGIN_PAGE_TITLE))
         assert login_page_title.is_displayed()
+        assert driver.current_url == Urls.LOGIN_PAGE

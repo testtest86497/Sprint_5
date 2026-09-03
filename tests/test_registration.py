@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, RegisterPageLocators, LoginPageLocators
-from data import generate_email, generate_password
+from data import Urls, generate_email, generate_password
 
 
 class TestRegistration:
@@ -23,6 +23,7 @@ class TestRegistration:
 
         login_page_title = wait.until(EC.visibility_of_element_located(LoginPageLocators.LOGIN_PAGE_TITLE))
         assert login_page_title.text == 'Вход'
+        assert driver.current_url == Urls.LOGIN_PAGE
 
 
     def test_registration_with_not_valid_password(self, driver):
@@ -41,3 +42,4 @@ class TestRegistration:
 
         password_error = wait.until(EC.visibility_of_element_located(RegisterPageLocators.PASSWORD_ERROR))
         assert password_error.text == 'Некорректный пароль'
+        assert driver.current_url == Urls.REGISTER_PAGE

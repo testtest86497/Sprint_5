@@ -1,6 +1,13 @@
 import random
 import string
 
+class Urls:
+    BASE_URL = 'https://stellarburgers.education-services.ru'
+    MAIN_PAGE = BASE_URL + '/'
+    LOGIN_PAGE = BASE_URL + '/login'
+    REGISTER_PAGE = BASE_URL + '/register'
+    FORGOT_PASSWORD_PAGE = BASE_URL + '/forgot-password'
+    ACCOUNT_PAGE = BASE_URL + '/account/profile'
 
 def generate_email():
     random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
